@@ -7,11 +7,11 @@
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "skipLibCheck": true,
-        "types": ["node"],
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "outDir": "dist",
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "declaration": true
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", "dist", "test"]
