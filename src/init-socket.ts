@@ -19,18 +19,17 @@ const initSocket = () => {
             ...gameStateInstance,
             timeSend: new Date(),
         });
-    });
-
-    io.on("syncVideo", (socketId, data) => {
-        console.log("syncVideo", socketId, data);
-        const now = new Date();
-        io.to(socketId).emit("syncVideo", {
-            ...gameStateInstance,
-            timeSend: now,
-            now:
-                Math.abs(
-                    now.getTime() - gameStateInstance.timeStart.getTime(),
-                ) / 1000,
+        socket.on("syncVideo", (socketId) => {
+            console.log("syncVideo", socketId);
+            const now = new Date();
+            socket.emit("syncVideo", {
+                ...gameStateInstance,
+                timeSend: now,
+                now:
+                    Math.abs(
+                        now.getTime() - gameStateInstance.timeStart.getTime(),
+                    ) / 1000,
+            });
         });
     });
 
