@@ -5,11 +5,12 @@ import generateResult from "./generate-result.js";
 import socketInstance from "./init-socket.js";
 import getVideoUrl from "./init-video.js";
 import players from "./players.js";
+import privateStateInstance from "./private-state.js";
 
 const startGameLoop = async () => {
     if (players.length < 1) {
         console.log("no players", players);
-        setTimeout(() => {
+        privateStateInstance.timeoutId = setTimeout(() => {
             startGameLoop();
         }, 1000);
         return;
@@ -36,6 +37,7 @@ const startGameLoop = async () => {
         home,
         away,
     };
+    gameStateInstance.currentTime = 0;
 
     gameStateInstance.videoUrl = {
         "720p": videoUrl,
@@ -51,7 +53,8 @@ const startGameLoop = async () => {
     socketInstance.emit("gameResult", gameStateInstance);
 
     console.log("Will send after ", totalDuration);
-    setTimeout(() => {
+
+    privateStateInstance.timeoutId = setTimeout(() => {
         startGameLoop();
     }, totalDuration * 1000);
 };

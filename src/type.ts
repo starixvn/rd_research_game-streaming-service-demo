@@ -17,4 +17,9 @@ export type GameState = {
         "240p": string;
     };
     totalDuration: number;
+    currentTime: number;
+};
+
+export type PrivateState = {
+    timeoutId?: NodeJS.Timeout;
 };

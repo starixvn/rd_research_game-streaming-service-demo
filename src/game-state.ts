@@ -11,6 +11,7 @@ const gameStateInstance: GameState = {
         "240p": "",
     },
     totalDuration: 0,
+    currentTime: 0,
 };
 
 export default gameStateInstance;
