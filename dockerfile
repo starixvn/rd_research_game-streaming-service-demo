@@ -1,11 +1,11 @@
-FROM node:alpine AS builder
+FROM hub.lumigame.com/base/node:lts-alpine-24h1.1 AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM node:alpine
+FROM hub.lumigame.com/base/node:lts-alpine-24h1.1
 WORKDIR /app
 COPY --from=builder /app .
 ENV NODE_ENV=production
