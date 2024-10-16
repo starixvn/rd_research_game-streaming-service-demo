@@ -45,6 +45,7 @@ const startGameLoop = async () => {
             resolution: VideoResolution["240p"],
         }),
     };
+    gameStateInstance.totalDuration = totalDuration;
 
     console.log("sendGameResult", gameStateInstance);
     socketInstance.emit("gameResult", gameStateInstance);

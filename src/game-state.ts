@@ -1,6 +1,6 @@
 import { GameState } from "./type.js";
 
-const gameStateIntance: GameState = {
+const gameStateInstance: GameState = {
     timeStart: new Date(),
     result: {
         home: 0,
@@ -10,6 +10,7 @@ const gameStateIntance: GameState = {
         "720p": "",
         "240p": "",
     },
+    totalDuration: 0,
 };
 
-export default gameStateIntance;
+export default gameStateInstance;

@@ -16,4 +16,5 @@ export type GameState = {
         "720p": string;
         "240p": string;
     };
+    totalDuration: number;
 };

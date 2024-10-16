@@ -15,12 +15,23 @@ const initSocket = () => {
         socket.on("disconnect", () => {
             removePlayer(socket.id);
         });
-        socket.emit("joinGame", gameStateInstance);
+        socket.emit("joinGame", {
+            ...gameStateInstance,
+            timeSend: new Date(),
+        });
     });
 
-    io.on("playAnimation", (data) => {
-        console.log(data);
-        io.emit("playAnimation", data);
+    io.on("syncVideo", (socketId, data) => {
+        console.log("syncVideo", socketId, data);
+        const now = new Date();
+        io.to(socketId).emit("syncVideo", {
+            ...gameStateInstance,
+            timeSend: now,
+            now:
+                Math.abs(
+                    now.getTime() - gameStateInstance.timeStart.getTime(),
+                ) / 1000,
+        });
     });
 
     return io;
