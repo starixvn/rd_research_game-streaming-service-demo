@@ -15,9 +15,14 @@ const initSocket = () => {
         socket.on("disconnect", () => {
             removePlayer(socket.id);
         });
+        const now = new Date();
         socket.emit("joinGame", {
             ...gameStateInstance,
-            timeSend: new Date(),
+            timeSend: now,
+            now:
+                Math.abs(
+                    now.getTime() - gameStateInstance.timeStart.getTime(),
+                ) / 1000,
         });
         socket.on("syncVideo", (socketId) => {
             console.log("syncVideo", socketId);
