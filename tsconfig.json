@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "types": ["node"],
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "dist",
+        "noImplicitAny": false
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "dist", "test"]
+}
