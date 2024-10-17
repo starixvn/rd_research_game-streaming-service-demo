@@ -1,4 +1,4 @@
-import { GameState } from "./type.js";
+import { GameState } from "../type.js";
 
 const gameStateInstance: GameState = {
     timeStart: new Date(),

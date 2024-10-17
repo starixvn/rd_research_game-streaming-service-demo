@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import gameStateInstance from "./game-state.js";
 import socketInstance from "./init-socket.js";
-import privateStateInstance from "./private-state.js";
-import startGameLoop from "./start-game-loop.js";
+import startGameLoop from "../start-game-loop.js";
+import gameStateInstance from "../states/game-state.js";
+import privateStateInstance from "../states/private-state.js";
 
 const expressInstance = express();
 expressInstance.use(
@@ -18,17 +18,18 @@ expressInstance.get("/", (_, res) => {
 
 expressInstance.get("/setTime/:time", (req, res) => {
     gameStateInstance.currentTime = Number(req.params.time);
-    socketInstance.emit("syncVideo", gameStateInstance.currentTime);
+    privateStateInstance.changeTimeMoment = new Date();
+    socketInstance.emit("syncVideo", gameStateInstance);
     if (privateStateInstance.timeoutId) {
         clearTimeout(privateStateInstance.timeoutId);
         const remainTime =
             gameStateInstance.totalDuration - gameStateInstance.currentTime;
         if (remainTime > 0) {
-            console.log("Will send after", remainTime);
+            console.log("New game will send after", remainTime);
             privateStateInstance.timeoutId = setTimeout(() => {
                 startGameLoop();
             }, remainTime * 1000);
-            res.send(`Will send after ${remainTime}`);
+            res.send(`New game will send after ${remainTime}`);
         } else {
             res.send("Time is invalid");
         }

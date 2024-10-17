@@ -1,11 +1,11 @@
 import { Parser } from "m3u8-parser";
 import { VideoResolution } from "./constant.js";
-import gameStateInstance from "./game-state.js";
-import generateResult from "./generate-result.js";
-import socketInstance from "./init-socket.js";
-import getVideoUrl from "./init-video.js";
-import players from "./players.js";
-import privateStateInstance from "./private-state.js";
+import gameStateInstance from "./states/game-state.js";
+import generateResult from "./helpers/generate-result.js";
+import getVideoUrl from "./helpers/get-video-url.js";
+import socketInstance from "./network-instances/init-socket.js";
+import players from "./states/players.js";
+import privateStateInstance from "./states/private-state.js";
 
 const startGameLoop = async () => {
     if (players.length < 1) {
@@ -31,8 +31,9 @@ const startGameLoop = async () => {
     const totalDuration = Math.ceil(
         segments.reduce((acc, segment) => acc + segment.duration, 0),
     );
-
-    gameStateInstance.timeStart = new Date();
+    const now = new Date();
+    gameStateInstance.timeStart = now;
+    privateStateInstance.changeTimeMoment = now;
     gameStateInstance.result = {
         home,
         away,
@@ -52,7 +53,7 @@ const startGameLoop = async () => {
     console.log("sendGameResult", gameStateInstance);
     socketInstance.emit("gameResult", gameStateInstance);
 
-    console.log("Will send after ", totalDuration);
+    console.log("New game will send after", totalDuration);
 
     privateStateInstance.timeoutId = setTimeout(() => {
         startGameLoop();

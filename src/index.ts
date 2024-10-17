@@ -1,5 +1,5 @@
-import socketInstance from "./init-socket.js";
-import serverInstance from "./init-server.js";
+import socketInstance from "./network-instances/init-socket.js";
+import serverInstance from "./network-instances/init-server.js";
 import startGameLoop from "./start-game-loop.js";
 
 socketInstance;

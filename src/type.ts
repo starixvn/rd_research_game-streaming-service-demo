@@ -22,4 +22,5 @@ export type GameState = {
 
 export type PrivateState = {
     timeoutId?: NodeJS.Timeout;
+    changeTimeMoment?: Date;
 };

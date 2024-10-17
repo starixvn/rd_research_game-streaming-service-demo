@@ -1,5 +1,5 @@
-import appConfig from "./config.js";
-import { VideoInformation } from "./type.js";
+import appConfig from "../config.js";
+import { VideoInformation } from "../type.js";
 
 const getVideoUrl = ({ home, away, resolution }: VideoInformation) => {
     const videoUrl = new URL(

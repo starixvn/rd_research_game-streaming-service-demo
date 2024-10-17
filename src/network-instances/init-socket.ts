@@ -1,7 +1,9 @@
 import { Server } from "socket.io";
 import serverInstance from "./init-server.js";
-import { addPlayer, removePlayer } from "./players.js";
-import gameStateInstance from "./game-state.js";
+import { addPlayer, removePlayer } from "../states/players.js";
+import gameStateInstance from "../states/game-state.js";
+import calculateTimeDistanceInSecond from "../helpers/calculate-time-distance-in-second.js";
+import privateStateInstance from "../states/private-state.js";
 
 const initSocket = () => {
     const io = new Server(serverInstance, {
@@ -19,10 +21,13 @@ const initSocket = () => {
         socket.emit("joinGame", {
             ...gameStateInstance,
             timeSend: now,
-            now:
-                Math.abs(
-                    now.getTime() - gameStateInstance.timeStart.getTime(),
-                ) / 1000,
+            currentTime:
+                gameStateInstance.currentTime +
+                calculateTimeDistanceInSecond(
+                    now,
+                    privateStateInstance.changeTimeMoment ??
+                        gameStateInstance.timeStart,
+                ),
         });
         socket.on("syncVideo", (socketId) => {
             console.log("syncVideo", socketId);
@@ -30,10 +35,13 @@ const initSocket = () => {
             socket.emit("syncVideo", {
                 ...gameStateInstance,
                 timeSend: now,
-                now:
-                    Math.abs(
-                        now.getTime() - gameStateInstance.timeStart.getTime(),
-                    ) / 1000,
+                currentTime:
+                    gameStateInstance.currentTime +
+                    calculateTimeDistanceInSecond(
+                        now,
+                        privateStateInstance.changeTimeMoment ??
+                            gameStateInstance.timeStart,
+                    ),
             });
         });
     });
