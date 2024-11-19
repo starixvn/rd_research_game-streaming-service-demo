@@ -22,6 +22,15 @@ const startGameLoop = async () => {
         away,
         resolution: VideoResolution["720p"],
     });
+    try {
+        await fetch(videoUrl);
+    } catch (e) {
+        console.log(e);
+        privateStateInstance.timeoutId = setTimeout(() => {
+            startGameLoop();
+        }, 1000);
+        return;
+    }
     const propertiesRequest = await fetch(videoUrl);
     const properties = await propertiesRequest.text();
     var parser = new Parser();
