@@ -1,8 +1,8 @@
 import { VideoResolution } from "./constant.js";
 
 export type VideoInformation = {
-    home: number;
-    away: number;
+    result: string;
+    numberOfVideos: number;
     resolution: VideoResolution;
 };
 

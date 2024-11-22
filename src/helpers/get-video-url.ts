@@ -1,9 +1,22 @@
 import appConfig from "../config.js";
 import { VideoInformation } from "../type.js";
+import * as crypto from "crypto";
 
-const getVideoUrl = ({ home, away, resolution }: VideoInformation) => {
+const getVideoUrl = ({
+    result,
+    numberOfVideos,
+    resolution,
+}: VideoInformation) => {
+    const videoIndex =
+        numberOfVideos > 1
+            ? Math.floor(Math.random() * (numberOfVideos - 1))
+            : 1;
+    const videoName = crypto
+        .createHash("md5")
+        .update(`${result}-${videoIndex}`)
+        .digest("hex");
     const videoUrl = new URL(
-        `football_marble_${home}-${away}_${resolution}.m3u8`,
+        `${videoName}_${resolution}.m3u8`,
         appConfig.liveStreamServer,
     );
 

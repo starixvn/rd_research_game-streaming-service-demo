@@ -16,10 +16,10 @@ const startGameLoop = async () => {
         return;
     }
 
-    const { home, away } = generateResult();
+    const { home, away, result, numberOfVideos } = generateResult();
     const videoUrl = getVideoUrl({
-        home,
-        away,
+        result,
+        numberOfVideos,
         resolution: VideoResolution["720p"],
     });
     try {
@@ -52,8 +52,8 @@ const startGameLoop = async () => {
     gameStateInstance.videoUrl = {
         "720p": videoUrl,
         "240p": getVideoUrl({
-            home,
-            away,
+            result,
+            numberOfVideos,
             resolution: VideoResolution["240p"],
         }),
     };
