@@ -10,7 +10,7 @@ const getVideoUrl = ({
     const videoIndex =
         numberOfVideos > 1
             ? Math.floor(Math.random() * (numberOfVideos - 1))
-            : 1;
+            : 0;
     const videoName = crypto
         .createHash("md5")
         .update(`${result}-${videoIndex}`)
