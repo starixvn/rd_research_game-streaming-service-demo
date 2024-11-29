@@ -1,5 +1,5 @@
 {
-    "liveStreamServer": "https://scstream.s3.amazonaws.com/demo2/",
+    "liveStreamServer": "https://scstream.s3.amazonaws.com/demo/",
     "results": {
         "AAAA": 1,
         "AAAH": 1,
