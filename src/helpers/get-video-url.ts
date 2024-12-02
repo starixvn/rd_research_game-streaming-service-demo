@@ -12,7 +12,7 @@ const getVideoUrl = ({
             ? Math.floor(Math.random() * (numberOfVideos - 1))
             : 0;
     const videoName = crypto
-        .createHash("md5")
+        .createHash("sha256")
         .update(`${result}-${videoIndex}`)
         .digest("hex");
     const videoUrl = new URL(
