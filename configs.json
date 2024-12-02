@@ -1,5 +1,5 @@
 {
-    "liveStreamServer": "https://scstream.s3.amazonaws.com/demo/",
+    "liveStreamServer": "https://minio.lumigame.com/sc-stream/demo/",
     "results": {
         "AAAA": 1,
         "AAAH": 1,
